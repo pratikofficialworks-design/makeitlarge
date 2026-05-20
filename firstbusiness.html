@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Make IT Large – Get Your Business Online</title>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --sky: #e8f4fd; --sky2: #d0e9f9; --blue: #2e86c1;
+      --accent: #0ea5e9; --accent2: #38bdf8; --white: #ffffff;
+      --dark: #0c1e2e; --muted: #6b8fa8; --text: #1e3a4f;
+      --pad: clamp(64px, 10vw, 120px);
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'DM Sans', sans-serif; background: var(--sky); color: var(--text); overflow-x: hidden; }
+    body::before {
+      content: ''; position: fixed; inset: 0; z-index: 0; pointer-events: none;
+      background-image: linear-gradient(rgba(46,134,193,0.06) 1px, transparent 1px), linear-gradient(90deg, rgba(46,134,193,0.06) 1px, transparent 1px);
+      background-size: 48px 48px;
+    }
+    nav {
+      position: fixed; top: 0; width: 100%; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 18px 6vw; transition: all .4s;
+    }
+    nav.scrolled { background: rgba(232,244,253,0.95); backdrop-filter: blur(16px); box-shadow: 0 2px 24px rgba(46,134,193,0.12); border-bottom: 1px solid rgba(46,134,193,0.1); }
+    .nav-logo { font-family: 'Syne', sans-serif; font-size: 1.3rem; font-weight: 800; color: var(--dark); text-decoration: none; }
+    .nav-logo .it { color: var(--accent); }
+    .nav-links { display: flex; gap: 36px; list-style: none; }
+    .nav-links a { font-size: .82rem; font-weight: 500; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); text-decoration: none; transition: color .2s; }
+    .nav-links a:hover { color: var(--accent); }
+    .nav-cta { background: var(--accent); color: #fff; padding: 10px 22px; border-radius: 8px; font-size: .82rem; font-weight: 700; text-decoration: none; transition: all .2s; }
+    .nav-cta:hover { background: var(--blue); transform: translateY(-1px); }
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
+    .hamburger span { width: 24px; height: 2px; background: var(--dark); border-radius: 2px; }
+
+    #hero { min-height: 100vh; display: flex; align-items: center; padding: 120px 6vw 80px; position: relative; overflow: hidden; }
+    .blob { position: absolute; z-index: 0; pointer-events: none; border-radius: 50%; filter: blur(80px); opacity: .5; }
+    .blob1 { width: 600px; height: 600px; background: rgba(56,189,248,0.25); top: -150px; right: -100px; }
+    .blob2 { width: 400px; height: 400px; background: rgba(14,165,233,0.15); bottom: -100px; left: -100px; }
+    .hero-inner { position: relative; z-index: 1; display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: 80px; width: 100%; }
+    .hero-eyebrow { display: inline-flex; align-items: center; gap: 8px; background: rgba(14,165,233,0.1); border: 1px solid rgba(14,165,233,0.2); color: var(--accent); border-radius: 50px; font-size: .75rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; padding: 6px 16px; margin-bottom: 28px; }
+    .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); display: inline-block; animation: blink 1.5s infinite; }
+    @keyframes blink { 0%,100%{opacity:1}50%{opacity:.2} }
+    .hero-title { font-family: 'Syne', sans-serif; font-size: clamp(2.8rem, 5.5vw, 5rem); font-weight: 800; line-height: 1.05; color: var(--dark); margin-bottom: 24px; letter-spacing: -.02em; }
+    .hero-title .hl { color: var(--accent); }
+    .hero-title .bl { display: block; color: #1a5276; }
+    .hero-desc { font-size: 1.05rem; color: var(--muted); line-height: 1.85; max-width: 460px; margin-bottom: 40px; }
+    .hero-desc strong { color: var(--text); font-weight: 600; }
+    .hero-actions { display: flex; gap: 14px; flex-wrap: wrap; }
+    .btn-solid { background: var(--accent); color: #fff; padding: 14px 32px; border-radius: 8px; text-decoration: none; font-size: .92rem; font-weight: 700; transition: all .2s; box-shadow: 0 6px 20px rgba(14,165,233,0.35); }
+    .btn-solid:hover { background: var(--blue); transform: translateY(-2px); }
+    .btn-outline { border: 2px solid rgba(46,134,193,0.3); color: var(--blue); padding: 14px 32px; border-radius: 8px; text-decoration: none; font-size: .92rem; font-weight: 600; transition: all .2s; background: rgba(255,255,255,0.5); }
+    .btn-outline:hover { border-color: var(--accent); color: var(--accent); }
+    .browser { background: var(--white); border-radius: 16px; box-shadow: 0 30px 80px rgba(28,90,140,0.2); overflow: hidden; }
+    .bbar { background: var(--sky2); padding: 12px 16px; display: flex; align-items: center; gap: 8px; border-bottom: 1px solid rgba(46,134,193,0.1); }
+    .bdot { width: 10px; height: 10px; border-radius: 50%; }
+    .bd1{background:#ff6b6b}.bd2{background:#ffd93d}.bd3{background:#6bcb77}
+    .burl { flex: 1; margin-left: 8px; background: rgba(255,255,255,0.7); border-radius: 6px; padding: 5px 12px; font-size: .75rem; color: var(--muted); }
+    .bcontent { height: 280px; background: linear-gradient(160deg, #e8f6fd, #d0eaf9, #bee3f8); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; }
+    .bcontent .icon { font-size: 3rem; }
+    .bcontent .title { font-family: 'Syne', sans-serif; font-size: 1.1rem; font-weight: 700; color: #1a5276; }
+    .bcontent .sub { font-size: .8rem; color: var(--muted); }
+    .fcard { position: absolute; background: var(--white); border-radius: 14px; padding: 14px 18px; box-shadow: 0 10px 40px rgba(28,90,140,0.15); display: flex; align-items: center; gap: 10px; animation: fl 4s ease-in-out infinite; }
+    .fc1 { bottom: -20px; left: -30px; }
+    .fc2 { top: 20px; right: -30px; animation-delay: 1.5s; }
+    .fcard .fi { font-size: 1.4rem; }
+    .fcard .ft { font-size: .78rem; font-weight: 700; color: var(--dark); }
+    .fcard .fs { font-size: .68rem; color: var(--muted); margin-top: 1px; }
+    @keyframes fl { 0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)} }
+    .hero-stats { display: flex; gap: 32px; margin-top: 48px; padding-top: 32px; border-top: 1px solid rgba(46,134,193,0.12); }
+    .snum { font-family: 'Syne', sans-serif; font-size: 1.8rem; font-weight: 800; color: var(--accent); line-height: 1; }
+    .slabel { font-size: .75rem; color: var(--muted); font-weight: 500; margin-top: 4px; }
+
+    section { padding: var(--pad) 6vw; position: relative; z-index: 1; }
+    .stag { font-size: .72rem; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; color: var(--accent); margin-bottom: 12px; display: block; }
+    .stitle { font-family: 'Syne', sans-serif; font-size: clamp(2rem, 4vw, 3rem); font-weight: 800; line-height: 1.1; color: var(--dark); letter-spacing: -.02em; }
+    .stitle .hl { color: var(--accent); }
+    .sdesc { font-size: .97rem; color: var(--muted); line-height: 1.85; max-width: 520px; margin-top: 14px; }
+    .rule { width: 48px; height: 3px; background: linear-gradient(to right, var(--accent), var(--accent2)); border-radius: 3px; margin: 18px 0; }
+
+    #how { background: var(--white); }
+    .steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 28px; margin-top: 56px; }
+    .step { background: var(--sky); border-radius: 20px; padding: 32px 28px; border: 1px solid rgba(46,134,193,0.1); position: relative; transition: all .3s; }
+    .step:hover { transform: translateY(-4px); box-shadow: 0 20px 50px rgba(14,165,233,0.12); }
+    .step-n { font-family: 'Syne', sans-serif; font-size: 3.5rem; font-weight: 800; color: rgba(14,165,233,0.12); line-height: 1; position: absolute; top: 16px; right: 20px; }
+    .step-ic { font-size: 2rem; margin-bottom: 16px; display: block; }
+    .step-t { font-family: 'Syne', sans-serif; font-size: 1.1rem; font-weight: 700; color: var(--dark); margin-bottom: 8px; }
+    .step-d { font-size: .88rem; color: var(--muted); line-height: 1.7; }
+
+    #explainer { background: var(--sky); }
+    .expl { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
+    .expl-box { background: var(--white); border-radius: 24px; padding: 40px; border: 1px solid rgba(46,134,193,0.12); box-shadow: 0 20px 60px rgba(28,90,140,0.1); }
+    .vs { display: grid; grid-template-columns: 1fr auto 1fr; gap: 16px; align-items: center; }
+    .vsb { border-radius: 14px; padding: 20px 16px; text-align: center; }
+    .vss { background: rgba(14,165,233,0.08); border: 2px solid rgba(14,165,233,0.2); }
+    .vsd { background: rgba(255,100,100,0.06); border: 2px solid rgba(255,100,100,0.15); }
+    .vsl { font-family: 'Syne', sans-serif; font-size: .85rem; font-weight: 800; margin-bottom: 10px; }
+    .vss .vsl { color: var(--accent); }
+    .vsd .vsl { color: #e74c3c; }
+    .vsic { font-size: 1.8rem; margin-bottom: 8px; display: block; }
+    .vsi { font-size: .78rem; color: var(--muted); margin: 4px 0; }
+    .vsdiv { font-family: 'Syne', sans-serif; font-weight: 800; color: var(--muted); font-size: 1rem; text-align: center; }
+    .vsnote { margin-top: 20px; padding: 14px 16px; background: rgba(14,165,233,0.07); border-radius: 10px; border-left: 3px solid var(--accent); font-size: .83rem; color: var(--text); line-height: 1.6; }
+    .vsnote strong { color: var(--accent); }
+
+    #pricing { background: var(--white); }
+    .pgrid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; margin-top: 52px; }
+    .pcard { border-radius: 24px; padding: 40px 36px; border: 2px solid rgba(46,134,193,0.1); position: relative; transition: all .3s; background: var(--sky); }
+    .pcard.feat { background: var(--dark); border-color: var(--accent); box-shadow: 0 20px 60px rgba(14,165,233,0.25); }
+    .pcard:hover { transform: translateY(-5px); }
+    .ftag { position: absolute; top: 20px; right: 20px; background: var(--accent); color: #fff; font-size: .65rem; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; padding: 4px 12px; border-radius: 50px; }
+    .pname { font-family: 'Syne', sans-serif; font-size: 1rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); margin-bottom: 16px; }
+    .feat .pname { color: var(--accent2); }
+    .pamt { font-family: 'Syne', sans-serif; font-size: 3rem; font-weight: 800; color: var(--dark); line-height: 1; margin-bottom: 4px; }
+    .feat .pamt { color: var(--white); }
+    .pper { font-size: .85rem; color: var(--muted); margin-bottom: 28px; }
+    .pfeat { list-style: none; margin-bottom: 32px; }
+    .pfeat li { display: flex; align-items: flex-start; gap: 10px; padding: 8px 0; border-bottom: 1px solid rgba(46,134,193,0.08); font-size: .88rem; color: var(--text); line-height: 1.5; }
+    .feat .pfeat li { color: rgba(255,255,255,0.75); border-bottom-color: rgba(255,255,255,0.08); }
+    .pfeat li:last-child { border-bottom: none; }
+    .ck { color: var(--accent); font-size: 1rem; flex-shrink: 0; margin-top: 1px; }
+    .feat .ck { color: var(--accent2); }
+    .pcta { display: block; text-align: center; background: rgba(14,165,233,0.1); color: var(--accent); border: 2px solid rgba(14,165,233,0.25); border-radius: 10px; padding: 13px; font-size: .88rem; font-weight: 700; text-decoration: none; transition: all .2s; }
+    .pcta:hover { background: var(--accent); color: #fff; }
+    .feat .pcta { background: var(--accent); color: #fff; border-color: var(--accent); }
+    .ucall { margin-top: 24px; padding: 24px 28px; background: rgba(14,165,233,0.06); border: 1px solid rgba(14,165,233,0.15); border-radius: 16px; display: flex; align-items: center; gap: 20px; }
+    .ucall .uic { font-size: 2rem; flex-shrink: 0; }
+    .ucall .ut { font-family: 'Syne', sans-serif; font-size: 1rem; font-weight: 700; color: var(--dark); margin-bottom: 4px; }
+    .ucall .ud { font-size: .87rem; color: var(--muted); line-height: 1.65; }
+    .ucall .ud strong { color: var(--accent); }
+
+    #demos { background: var(--sky); }
+    .dgrid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; margin-top: 52px; }
+    .dcard { background: var(--white); border-radius: 20px; overflow: hidden; border: 1px solid rgba(46,134,193,0.1); box-shadow: 0 8px 30px rgba(28,90,140,0.08); transition: all .3s; cursor: pointer; text-decoration: none; display: block; }
+    .dcard:hover { transform: translateY(-5px); box-shadow: 0 20px 60px rgba(28,90,140,0.15); border-color: rgba(14,165,233,0.25); }
+    .dprev { height: 180px; display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 10px; font-size: 2.4rem; position: relative; }
+    .dp1 { background: linear-gradient(135deg, #fdf0eb, #f5d5c8); }
+    .dp2 { background: linear-gradient(135deg, #1a1010, #2d1515); }
+    .dp3 { background: linear-gradient(135deg, #1a1035, #2d1a55); }
+    .dlabel { font-size: .7rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
+    .dp1 .dlabel { color: #c8836a; }
+    .dp2 .dlabel { color: rgba(255,255,255,0.5); }
+    .dp3 .dlabel { color: rgba(255,217,61,0.7); }
+    .dbadge { position: absolute; top: 12px; right: 12px; background: rgba(255,255,255,0.9); color: var(--accent); font-size: .65rem; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; padding: 3px 10px; border-radius: 50px; }
+    .dbody { padding: 22px 24px; }
+    .dname { font-family: 'Syne', sans-serif; font-size: 1.15rem; font-weight: 700; color: var(--dark); margin-bottom: 4px; }
+    .dsub { font-size: .82rem; color: var(--muted); margin-bottom: 16px; line-height: 1.5; }
+    .dtags { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 18px; }
+    .dtag { font-size: .7rem; font-weight: 600; padding: 3px 10px; border-radius: 50px; background: rgba(14,165,233,0.08); color: var(--accent); border: 1px solid rgba(14,165,233,0.15); }
+    .dlink { font-size: .83rem; font-weight: 700; color: var(--accent); }
+
+    #cta { background: var(--dark); text-align: center; position: relative; overflow: hidden; }
+    #cta::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 60% 60% at 50% 0%, rgba(14,165,233,0.2) 0%, transparent 65%); }
+    .ctai { position: relative; z-index: 1; }
+    .ctitle { font-family: 'Syne', sans-serif; font-size: clamp(2rem, 5vw, 3.8rem); font-weight: 800; color: var(--white); line-height: 1.1; margin-bottom: 20px; }
+    .ctitle .hl { color: var(--accent2); }
+    .cdesc { font-size: 1rem; color: rgba(255,255,255,0.5); line-height: 1.8; max-width: 500px; margin: 0 auto 40px; }
+    .wacta { display: inline-flex; align-items: center; gap: 10px; background: #25D366; color: #fff; border-radius: 10px; padding: 16px 32px; text-decoration: none; font-size: .92rem; font-weight: 700; transition: all .2s; box-shadow: 0 6px 20px rgba(37,211,102,0.3); }
+    .wacta:hover { background: #1ebe5d; transform: translateY(-2px); }
+    .wacta svg { width: 20px; height: 20px; }
+    .cnote { margin-top: 24px; font-size: .82rem; color: rgba(255,255,255,0.3); }
+    .cnote strong { color: rgba(255,255,255,0.5); }
+
+    footer { background: #080f18; text-align: center; padding: 36px 6vw; border-top: 1px solid rgba(255,255,255,0.05); position: relative; z-index: 1; }
+    .flogo { font-family: 'Syne', sans-serif; font-size: 1.3rem; font-weight: 800; color: var(--white); margin-bottom: 10px; }
+    .flogo span { color: var(--accent); }
+    footer p { font-size: .8rem; color: rgba(255,255,255,0.25); margin-top: 6px; }
+    .fn { color: var(--accent2); font-weight: 600; }
+
+    .waf { position: fixed; bottom: 28px; right: 28px; z-index: 999; width: 60px; height: 60px; border-radius: 50%; background: #25D366; color: #fff; text-decoration: none; display: flex; align-items: center; justify-content: center; box-shadow: 0 8px 30px rgba(37,211,102,0.4); animation: wap 2.5s infinite; }
+    .waf:hover { transform: scale(1.1); }
+    .waf svg { width: 28px; height: 28px; }
+    @keyframes wap { 0%,100%{box-shadow:0 8px 30px rgba(37,211,102,0.4)}50%{box-shadow:0 8px 50px rgba(37,211,102,0.65)} }
+
+    #hosting-options { background: var(--sky); }
+    .hosting-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin-top: 48px; }
+    .hosting-card { background: var(--white); border-radius: 16px; padding: 36px; border: 2px solid rgba(46,134,193,0.1); transition: all .3s; }
+    .hosting-card:hover { border-color: rgba(46,134,193,0.3); box-shadow: 0 20px 50px rgba(46,134,193,0.08); }
+    .hosting-card-title { font-family: 'Syne', sans-serif; font-size: 1.4rem; font-weight: 800; color: var(--dark); margin-bottom: 16px; display: flex; align-items: center; gap: 12px; }
+    .hosting-card-icon { font-size: 2rem; }
+    .hosting-card-subtitle { font-size: .9rem; font-weight: 600; color: var(--accent); margin-bottom: 20px; }
+    .hosting-list { display: flex; flex-direction: column; gap: 14px; margin: 24px 0; }
+    .hosting-item { display: flex; gap: 12px; align-items: flex-start; font-size: .95rem; color: var(--text); line-height: 1.5; }
+    .hosting-item-icon { font-weight: 700; color: var(--accent); min-width: 20px; margin-top: 2px; }
+    .hosting-card-note { background: rgba(14,165,233,0.05); border-left: 4px solid var(--accent); padding: 14px 16px; border-radius: 6px; font-size: .87rem; color: var(--text); margin-top: 20px; line-height: 1.6; }
+    .hosting-cta { display: inline-block; margin-top: 24px; padding: 12px 24px; background: var(--accent); color: #fff; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: .9rem; transition: all .2s; }
+    .hosting-cta:hover { background: var(--blue); transform: translateY(-2px); }
+    .mobile-popup-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.6); z-index: 9999; display: none; align-items: center; justify-content: center; animation: fadeIn .3s ease; }
+    .mobile-popup-overlay.active { display: flex; }
+    .mobile-popup { background: var(--white); border-radius: 20px; padding: 40px 28px; max-width: 320px; text-align: center; animation: slideUp .3s ease; box-shadow: 0 30px 80px rgba(0,0,0,0.3); }
+    .popup-icon { font-size: 3rem; margin-bottom: 16px; display: block; }
+    .popup-title { font-family: 'Syne', sans-serif; font-size: 1.4rem; font-weight: 800; color: var(--dark); margin-bottom: 12px; }
+    .popup-desc { font-size: .95rem; color: var(--muted); line-height: 1.6; margin-bottom: 24px; }
+    .popup-actions { display: flex; flex-direction: column; gap: 12px; }
+    .popup-btn { padding: 12px 24px; border-radius: 8px; font-size: .9rem; font-weight: 600; text-decoration: none; border: none; cursor: pointer; transition: all .2s; }
+    .popup-btn-primary { background: var(--accent); color: #fff; }
+    .popup-btn-primary:hover { background: var(--blue); transform: translateY(-1px); }
+    .popup-btn-secondary { background: rgba(14,165,233,0.1); color: var(--accent); border: 2px solid var(--accent); }
+    .popup-btn-secondary:hover { background: rgba(14,165,233,0.2); }
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    @keyframes slideUp { from { transform: translateY(30px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+    .fade-up { opacity: 0; transform: translateY(28px); transition: opacity .7s ease, transform .7s ease; }
+    .fade-up.visible { opacity: 1; transform: none; }
+
+    #know, #after { position: relative; z-index: 1; }
+    #know section { padding: var(--pad) 6vw; }
+    #after .expl-box { margin: 0 auto; }
+
+    @media (max-width: 900px) {
+      .nav-links, .nav-cta { display: none; }
+      .hamburger { display: flex; }
+      .hero-inner { grid-template-columns: 1fr; gap: 40px; text-align: center; }
+      .hero-desc { margin: 0 auto 40px; }
+      .hero-actions { justify-content: center; }
+      .hero-stats { justify-content: center; }
+      .fc1, .fc2 { display: none; }
+      .expl { grid-template-columns: 1fr; }
+      .ucall { flex-direction: column; text-align: center; }
+      section { padding: clamp(48px, 8vw, var(--pad)) 6vw; }
+    }
+    @media (max-width: 900px) {
+      .hosting-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 760px) {
+      .hosting-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 700px) {
+      #know > div:nth-child(2) { grid-template-columns: 1fr !important; gap: 20px !important; }
+      #after .expl-box { padding: 28px 20px !important; }
+    }
+    @media (max-width: 560px) {
+      .pgrid, .dgrid, .steps { grid-template-columns: 1fr; }
+      .vs { grid-template-columns: 1fr; }
+      .vsdiv { display: none; }
+      #know > div:nth-child(2) { grid-template-columns: 1fr !important; gap: 16px !important; }
+      #after .expl-box { padding: 20px 16px !important; }
+      #after .stitle { font-size: clamp(1.8rem, 5vw, 2.8rem) !important; }
+      .hosting-card { padding: 24px 18px; }
+      .hosting-card-title { font-size: 1.15rem; }
+      body { --pad: clamp(48px, 8vw, 80px); }
+      section { padding: clamp(48px, 8vw, 80px) 6vw; }
+    }
+    @media (max-width: 420px) {
+      section { padding: 48px 5vw; }
+      .stitle { font-size: clamp(1.6rem, 5vw, 2rem) !important; }
+      .stag { font-size: 0.65rem !important; }
+      #know > div:nth-child(2) > div { padding: 20px 16px !important; }
+      #know > div:nth-child(2) > div > div:first-child { font-size: 1.8rem !important; }
+      #after .expl-box { padding: 16px 12px !important; }
+      #after [style*="width: 32px; height: 32px"] { width: 26px !important; height: 26px !important; font-size: 0.75rem !important; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="mobile-popup-overlay" id="mobilePopup">
+  <div class="mobile-popup">
+    <span class="popup-icon">🖥️</span>
+    <h3 class="popup-title">Switch to Desktop</h3>
+    <p class="popup-desc">For the best experience and full visibility, please open this website on a desktop or rotate your device to landscape mode.</p>
+    <div class="popup-actions">
+      <button class="popup-btn popup-btn-primary" onclick="document.getElementById('mobilePopup').classList.remove('active')">Got It!</button>
+      <button class="popup-btn popup-btn-secondary" onclick="if(window.innerWidth < 900) { alert('Please open on desktop for best experience!'); }">View on Desktop</button>
+    </div>
+  </div>
+</div>
+
+<nav id="nav">
+  <a class="nav-logo" href="#">Make <span class="it">IT</span> 1Arge</a>
+  <ul class="nav-links">
+    <li><a href="#how">How It Works</a></li>
+    <li><a href="#pricing">Pricing</a></li>
+    <li><a href="#demos">Our Work</a></li>
+    <li><a href="#cta">Contact</a></li>
+  </ul>
+  <a href="https://wa.me/916913349575" class="nav-cta" target="_blank">💬 WhatsApp Us</a>
+  <div class="hamburger"><span></span><span></span><span></span></div>
+</nav>
+
+<section id="hero">
+  <div class="blob blob1"></div>
+  <div class="blob blob2"></div>
+  <div class="hero-inner">
+    <div class="fade-up">
+      <span class="hero-eyebrow"><span class="dot"></span> Now serving businesses in Guwahati</span>
+      <h1 class="hero-title">
+        Your Business<br>
+        <span class="hl">Deserves to</span>
+        <span class="bl">Be Online.</span>
+      </h1>
+      <p class="hero-desc">
+        I'm <strong>Pratik</strong> — I build clean, fast websites for small local businesses at prices that actually make sense. <strong>No tech knowledge needed from your side.</strong> You focus on your business, I'll build the site and help you get it live.
+      </p>
+      <div class="hero-actions">
+        <a href="#pricing" class="btn-solid">See Pricing →</a>
+        <a href="#demos" class="btn-outline">View Our Work</a>
+      </div>
+      <div class="hero-stats">
+        <div><div class="snum">₹2000</div><div class="slabel">Complete Website</div></div>
+        <div><div class="snum">3</div><div class="slabel">Demo Sites Built</div></div>
+        <div><div class="snum">100%</div><div class="slabel">Local & Trustworthy</div></div>
+      </div>
+    </div>
+    <div class="fade-up" style="position:relative;transition-delay:.2s">
+      <div class="browser">
+        <div class="bbar">
+          <div class="bdot bd1"></div><div class="bdot bd2"></div><div class="bdot bd3"></div>
+          <div class="burl">yourbusiness.com</div>
+        </div>
+        <div class="bcontent">
+          <div class="icon">🌐</div>
+          <div class="title">Your Business Website</div>
+          <div class="sub">Live on Google in days, not weeks</div>
+        </div>
+      </div>
+      <div class="fcard fc1"><div class="fi">✅</div><div><div class="ft">Live on Google</div><div class="fs">Customers can find you</div></div></div>
+      <div class="fcard fc2"><div class="fi">📱</div><div><div class="ft">Mobile Friendly</div><div class="fs">Works on all phones</div></div></div>
+    </div>
+  </div>
+</section>
+
+<section id="how">
+  <div class="fade-up">
+    <span class="stag">The Process</span>
+    <h2 class="stitle">How It <span class="hl">Works</span></h2>
+    <div class="rule"></div>
+    <p class="sdesc">Simple, fast, zero hassle. You don't need to know anything about technology.</p>
+  </div>
+  <div class="steps fade-up">
+    <div class="step"><span class="step-n">01</span><span class="step-ic">💬</span><div class="step-t">You WhatsApp Me</div><p class="step-d">Tell me your business name, what you sell, your phone number, and any photos you want. That's literally all.</p></div>
+    <div class="step"><span class="step-n">02</span><span class="step-ic">🎨</span><div class="step-t">I Build Your Site</div><p class="step-d">I design and build your complete website — services, prices, photos, location map, WhatsApp button — everything.</p></div>
+    <div class="step"><span class="step-n">03</span><span class="step-ic">🔍</span><div class="step-t">You Review It</div><p class="step-d">I send you a preview link. You check it, suggest any changes, and I fix them — free, within the first month.</p></div>
+    <div class="step"><span class="step-n">04</span><span class="step-ic">🚀</span><div class="step-t">Goes Live!</div><p class="step-d">You deploy your website using my free step-by-step guide. I'll help you through every step. Pay ₹800/yr for a custom .com domain if you want.</p></div>
+  </div>
+</section>
+
+<section id="explainer">
+  <div class="expl">
+    <div class="fade-up">
+      <span class="stag">Plain English Explanation</span>
+      <h2 class="stitle">What's a <span class="hl">Static</span> Website?</h2>
+      <div class="rule"></div>
+      <p class="sdesc">Think of your website like a <strong>digital visiting card</strong> — but one that shows up on Google when someone searches for your business.</p>
+      <br>
+      <p class="sdesc">A <strong>static website</strong> is like a beautifully designed board outside your shop — it shows your services, prices, photos, location, and contact. Customers see it, they call or WhatsApp you, and you do business. Simple.</p>
+      <br>
+      <p class="sdesc" style="color:var(--text)">You don't need online payments, a shopping cart, or anything complicated. <strong>Most small businesses just need to be found online</strong> — and that's exactly what a static site does, perfectly.</p>
+    </div>
+    <div class="expl-box fade-up" style="transition-delay:.15s">
+      <div style="font-family:'Syne',sans-serif;font-weight:700;font-size:.85rem;color:var(--muted);letter-spacing:.1em;text-transform:uppercase;margin-bottom:20px">Static vs Complex Website</div>
+      <div class="vs">
+        <div class="vsb vss">
+          <span class="vsic">✨</span>
+          <div class="vsl">Static Site<br><small style="font-weight:400;color:var(--muted);font-size:.7rem">(What we make)</small></div>
+          <div class="vsi">✅ Shows your info</div>
+          <div class="vsi">✅ Works on Google</div>
+          <div class="vsi">✅ Mobile friendly</div>
+          <div class="vsi">✅ WhatsApp button</div>
+          <div class="vsi">✅ Maps & location</div>
+          <div class="vsi">✅ Free to host</div>
+        </div>
+        <div class="vsdiv">vs</div>
+        <div class="vsb vsd">
+          <span class="vsic">🏗️</span>
+          <div class="vsl">Complex Site<br><small style="font-weight:400;color:var(--muted);font-size:.7rem">(Like Amazon)</small></div>
+          <div class="vsi">🛒 Online shopping</div>
+          <div class="vsi">💳 Payment gateway</div>
+          <div class="vsi">📦 Inventory system</div>
+          <div class="vsi">🔐 User login</div>
+          <div class="vsi">💸 Very expensive</div>
+          <div class="vsi">⏱️ Months to build</div>
+        </div>
+      </div>
+      <div class="vsnote"><strong>Bottom line:</strong> For 90% of local shops — salons, restaurants, coaching centres, medicals — a static website is <strong>all you need</strong> to get customers from Google.</div>
+    </div>
+  </div>
+</section>
+
+<section id="pricing">
+  <div class="fade-up">
+    <span class="stag">Transparent Pricing</span>
+    <h2 class="stitle">Simple, Honest <span class="hl">Pricing</span></h2>
+    <div class="rule"></div>
+    <p class="sdesc">No hidden charges. No confusing packages. Just one fair price.</p>
+  </div>
+  <div class="pgrid fade-up">
+    <div class="pcard">
+      <div class="pname">You Host It</div>
+      <div class="pamt">Free</div>
+      <div class="pper">deploy on Netlify, Vercel, or GitHub Pages</div>
+      <ul class="pfeat">
+        <li><span class="ck">✓</span> Your own free link (yourbusiness.netlify.app)</li>
+        <li><span class="ck">✓</span> You own and control everything</li>
+        <li><span class="ck">✓</span> Works on mobile & desktop</li>
+        <li><span class="ck">✓</span> Generous free tier included</li>
+        <li><span class="ck">✗</span> No custom .com domain (add-on below)</li>
+      </ul>
+      <a href="https://wa.me/916913349575" class="pcta" target="_blank">I help you set it up</a>
+    </div>
+    <div class="pcard feat">
+      <div class="ftag">Most Popular</div>
+      <div class="pname">Complete Website</div>
+      <div class="pamt">₹2,000</div>
+      <div class="pper">one-time payment · no monthly fees</div>
+      <ul class="pfeat">
+        <li><span class="ck">✓</span> Full custom website built for you</li>
+        <li><span class="ck">✓</span> Services / products with prices</li>
+        <li><span class="ck">✓</span> Photo gallery section</li>
+        <li><span class="ck">✓</span> Opening hours display</li>
+        <li><span class="ck">✓</span> Google Maps location</li>
+        <li><span class="ck">✓</span> WhatsApp direct button</li>
+        <li><span class="ck">✓</span> Works on all phones</li>
+        <li><span class="ck">✓</span> Free changes for 1 full month</li>
+        <li><span class="ck">✓</span> Website files + deployment guide</li>
+        <li><span class="ck">✓</span> Personal help to get it live</li>
+      </ul>
+      <a href="https://wa.me/916913349575" class="pcta" target="_blank">💬 Get Started on WhatsApp</a>
+    </div>
+    <div class="pcard">
+      <div class="pname">Custom .com Domain</div>
+      <div class="pamt">₹800</div>
+      <div class="pper">per year · optional add-on</div>
+      <ul class="pfeat">
+        <li><span class="ck">✓</span> yourbusiness.com not .netlify.app</li>
+        <li><span class="ck">✓</span> Looks more professional</li>
+        <li><span class="ck">✓</span> Easy to remember & share</li>
+        <li><span class="ck">✓</span> You pay directly to GoDaddy</li>
+        <li><span class="ck">✓</span> I help you set it up for free</li>
+      </ul>
+      <a href="https://wa.me/916913349575" class="pcta" target="_blank">Ask me about this</a>
+    </div>
+  </div>
+  <div class="ucall fade-up">
+    <div class="uic">🔄</div>
+    <div>
+      <div class="ut">Need to update your website later?</div>
+      <div class="ud">Want to change your prices, add a new service, update photos, or change timings? <strong>Any update within the first month is completely FREE.</strong> After that, each update is just <strong>₹300 per request</strong> — I send you the updated files, you re-upload them. Quick, easy, no drama.</div>
+    </div>
+  </div>
+</section>
+
+<section id="know" style="background: var(--white);">
+  <div class="fade-up">
+    <span class="stag">Things to Know</span>
+    <h2 class="stitle">Before You <span class="hl">Start</span></h2>
+    <div class="rule"></div>
+    <p class="sdesc">Here's what to expect. We believe in being honest about how websites work, so you're not surprised later.</p>
+  </div>
+  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; margin-top: 52px;" class="fade-up">
+    <div style="background: var(--sky); border-radius: 20px; padding: 32px 28px; border: 1px solid rgba(46,134,193,0.1); transition: all .3s;">
+      <div style="font-size: 2rem; margin-bottom: 16px; display: block;">⏱️</div>
+      <div style="font-family: 'Syne', sans-serif; font-size: 1.1rem; font-weight: 700; color: var(--dark); margin-bottom: 8px;">Google Ranking Takes Time</div>
+      <p style="font-size: .88rem; color: var(--muted); line-height: 1.7;">
+        A new website won't show up on Google search immediately. It typically takes <strong>4–12 weeks</strong> for Google to index your site. Ranking for competitive keywords can take months. But here's the good news — <strong>the link works instantly</strong>. You can share it on WhatsApp, Instagram, or word of mouth from day one.
+      </p>
+    </div>
+    <div style="background: var(--sky); border-radius: 20px; padding: 32px 28px; border: 1px solid rgba(46,134,193,0.1); transition: all .3s;">
+      <div style="font-size: 2rem; margin-bottom: 16px; display: block;">🌐</div>
+      <div style="font-family: 'Syne', sans-serif; font-size: 1.1rem; font-weight: 700; color: var(--dark); margin-bottom: 8px;">Custom Domain is Optional</div>
+      <p style="font-size: .88rem; color: var(--muted); line-height: 1.7;">
+        By default, your site gets a free link like <strong>yourbusiness.netlify.app</strong> when you deploy it. If you want a professional <strong>yourbusiness.com</strong> address, it costs around <strong>₹1,500–2,000 per year</strong>. A custom domain also helps slightly with Google visibility over time.
+      </p>
+    </div>
+    <div style="background: var(--sky); border-radius: 20px; padding: 32px 28px; border: 1px solid rgba(46,134,193,0.1); transition: all .3s;">
+      <div style="font-size: 2rem; margin-bottom: 16px; display: block;">🤝</div>
+      <div style="font-family: 'Syne', sans-serif; font-size: 1.1rem; font-weight: 700; color: var(--dark); margin-bottom: 8px;">Website Alone Isn't Magic</div>
+      <p style="font-size: .88rem; color: var(--muted); line-height: 1.7;">
+        A website makes your business look professional and findable online. But it works best combined with <strong>Google Maps listing, WhatsApp sharing, and word of mouth</strong>. I'll guide you on setting up a free Google Business Profile after your site is live.
+      </p>
+    </div>
+  </div>
+</section>
+
+<section id="after" style="background: var(--sky);">
+  <div class="expl-box" style="max-width: 700px; margin: 0 auto;" class="fade-up">
+    <div class="fade-up">
+      <span class="stag" style="display: flex; align-items: center; gap: 8px;"><span style="font-size: 1.4rem;">🚀</span> After Your Site Goes Live</div>
+      <h2 class="stitle" style="margin-top: 12px; margin-bottom: 16px;">Your <span class="hl">Action</span> Plan</h2>
+      <p class="sdesc" style="margin-bottom: 24px;">To get the most out of your new website, follow these simple steps:</p>
+
+      <div style="display: flex; flex-direction: column; gap: 16px;">
+        <div style="display: flex; gap: 14px; align-items: flex-start;">
+          <div style="background: var(--accent); color: white; border-radius: 50%; width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; font-weight: 700; flex-shrink: 0; font-family: 'Syne', sans-serif; font-size: 0.9rem;">1</div>
+          <div>
+            <div style="font-family: 'Syne', sans-serif; font-weight: 700; color: var(--dark); margin-bottom: 4px;">Share on your WhatsApp status immediately</div>
+            <div style="font-size: .87rem; color: var(--muted); line-height: 1.6;">Let all your contacts see it directly.</div>
+          </div>
+        </div>
+        <div style="display: flex; gap: 14px; align-items: flex-start;">
+          <div style="background: var(--accent); color: white; border-radius: 50%; width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; font-weight: 700; flex-shrink: 0; font-family: 'Syne', sans-serif; font-size: 0.9rem;">2</div>
+          <div>
+            <div style="font-family: 'Syne', sans-serif; font-weight: 700; color: var(--dark); margin-bottom: 4px;">Send it to all your existing customers</div>
+            <div style="font-size: .87rem; color: var(--muted); line-height: 1.6;">They'll appreciate seeing you online, and many will share it further.</div>
+          </div>
+        </div>
+        <div style="display: flex; gap: 14px; align-items: flex-start;">
+          <div style="background: var(--accent); color: white; border-radius: 50%; width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; font-weight: 700; flex-shrink: 0; font-family: 'Syne', sans-serif; font-size: 0.9rem;">3</div>
+          <div>
+            <div style="font-family: 'Syne', sans-serif; font-weight: 700; color: var(--dark); margin-bottom: 4px;">Add it to your Google Maps business listing</div>
+            <div style="font-size: .87rem; color: var(--muted); line-height: 1.6;">This is huge for local visibility. I'll help you set it up if needed.</div>
+          </div>
+        </div>
+        <div style="display: flex; gap: 14px; align-items: flex-start;">
+          <div style="background: var(--accent); color: white; border-radius: 50%; width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; font-weight: 700; flex-shrink: 0; font-family: 'Syne', sans-serif; font-size: 0.9rem;">4</div>
+          <div>
+            <div style="font-family: 'Syne', sans-serif; font-weight: 700; color: var(--dark); margin-bottom: 4px;">Submit it to Google Search Console</div>
+            <div style="font-size: .87rem; color: var(--muted); line-height: 1.6;">This speeds up Google indexing — it's free and I'll show you exactly how to do it.</div>
+          </div>
+        </div>
+        <div style="display: flex; gap: 14px; align-items: flex-start;">
+          <div style="background: var(--accent); color: white; border-radius: 50%; width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; font-weight: 700; flex-shrink: 0; font-family: 'Syne', sans-serif; font-size: 0.9rem; opacity: 0.7;">✓</div>
+          <div>
+            <div style="font-family: 'Syne', sans-serif; font-weight: 700; color: var(--dark); margin-bottom: 4px;">Optional: Get a .com domain for better professionalism</div>
+            <div style="font-size: .87rem; color: var(--muted); line-height: 1.6;">Around ₹1,500–2,000/year. I'll help you set it up.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="demos">
+  <div class="fade-up">
+    <span class="stag">Real Examples</span>
+    <h2 class="stitle">Websites We've <span class="hl">Already Built</span></h2>
+    <div class="rule"></div>
+    <p class="sdesc">These are real demo websites — exactly the kind we'll build for your business. Click any card to see it live.</p>
+  </div>
+  <div class="dgrid fade-up">
+
+    <a href="https://demobeautyparlour.netlify.app" target="_blank" class="dcard">
+      <div class="dprev dp1">
+        <span>💇‍♀️</span>
+        <span class="dlabel">Beauty Parlour</span>
+        <span class="dbadge">Static Site</span>
+      </div>
+      <div class="dbody">
+        <div class="dname">Priya Beauty Parlour</div>
+        <div class="dsub">A complete salon website with services, prices, gallery, hours, map, and WhatsApp button.</div>
+        <div class="dtags"><span class="dtag">Services</span><span class="dtag">Gallery</span><span class="dtag">WhatsApp</span><span class="dtag">Map</span></div>
+        <div class="dlink">View Live Demo →</div>
+      </div>
+    </a>
+
+    <a href="https://demoredrestro.netlify.app" target="_blank" class="dcard">
+      <div class="dprev dp2">
+        <span>🍽️</span>
+        <span class="dlabel">Restaurant</span>
+        <span class="dbadge">Static Site</span>
+      </div>
+      <div class="dbody">
+        <div class="dname">Red Restro</div>
+        <div class="dsub">A bold restaurant website with full menu, veg/non-veg tags, gallery, hours and WhatsApp ordering.</div>
+        <div class="dtags"><span class="dtag">Menu</span><span class="dtag">Gallery</span><span class="dtag">WhatsApp Orders</span></div>
+        <div class="dlink">View Live Demo →</div>
+      </div>
+    </a>
+
+    <a href="https://demotoyshop.netlify.app" target="_blank" class="dcard">
+      <div class="dprev dp3">
+        <span>🧸</span>
+        <span class="dlabel">Toy Shop</span>
+        <span class="dbadge">Static Site</span>
+      </div>
+      <div class="dbody">
+        <div class="dname">Tokyo-Toy</div>
+        <div class="dsub">A vibrant toy store website with product cards, sale badges, gallery, contact and WhatsApp ordering.</div>
+        <div class="dtags"><span class="dtag">Products</span><span class="dtag">Pricing</span><span class="dtag">Gallery</span></div>
+        <div class="dlink">View Live Demo →</div>
+      </div>
+    </a>
+
+  </div>
+  <div style="margin-top:32px;text-align:center;font-size:.88rem;color:var(--muted)">
+    Your business can look just like these. <strong style="color:var(--accent)">WhatsApp me and we'll get started.</strong>
+  </div>
+</section>
+
+<section id="cta">
+  <div class="ctai fade-up">
+    <span class="stag" style="color:var(--accent2)">Ready to grow?</span>
+    <h2 class="ctitle">Let's Make It<br><span class="hl">Grow.</span></h2>
+    <p class="cdesc">Your competitors are already online. Don't let customers find them first. A website costs just ₹2,000 — one-time. No monthly fees, no hidden charges.</p>
+    <a href="https://wa.me/916913349575" class="wacta" target="_blank">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      Chat with Pratik on WhatsApp
+    </a>
+    <p class="cnote">No calls, no meetings needed. Just <strong>WhatsApp</strong> — and we'll sort everything from there.</p>
+  </div>
+</section>
+
+<section id="hosting-options">
+  <div class="fade-up">
+    <span class="stag">Deployment</span>
+    <h2 class="stitle">Getting Your Site <span class="hl">Live</span></h2>
+    <div class="rule"></div>
+    <p class="sdesc">You own your hosting. I give you everything you need and help you through every step.</p>
+  </div>
+
+  <div class="hosting-grid fade-up">
+    <div class="hosting-card">
+      <div class="hosting-card-title">
+        <span class="hosting-card-icon">📦</span>
+        What You Get
+      </div>
+      <div class="hosting-card-subtitle">Everything ready to go live</div>
+
+      <div class="hosting-list">
+        <div class="hosting-item">
+          <span class="hosting-item-icon">✓</span>
+          <span><strong>Complete website files</strong> — I send you a ZIP file with your entire website, ready to upload.</span>
+        </div>
+        <div class="hosting-item">
+          <span class="hosting-item-icon">✓</span>
+          <span><strong>Step-by-step guide</strong> — A simple video + text guide showing exactly how to upload to Netlify (free) in under 10 minutes.</span>
+        </div>
+        <div class="hosting-item">
+          <span class="hosting-item-icon">✓</span>
+          <span><strong>Personal help</strong> — Stuck? WhatsApp me. I'll jump on a call or share my screen to walk you through it.</span>
+        </div>
+        <div class="hosting-item">
+          <span class="hosting-item-icon">✓</span>
+          <span><strong>Future updates</strong> — Need changes later? I update the files and send you the new version to re-upload. Or if you shared access, I can update it directly.</span>
+        </div>
+      </div>
+
+      <div class="hosting-card-note">
+        💡 <strong>No tech skills needed.</strong> If you can use WhatsApp and drag-and-drop a file, you can do this. Most clients get their site live in 10–15 minutes.
+      </div>
+    </div>
+
+    <div class="hosting-card">
+      <div class="hosting-card-title">
+        <span class="hosting-card-icon">🚀</span>
+        How It Works
+      </div>
+      <div class="hosting-card-subtitle">From files to live website</div>
+
+      <div class="hosting-list">
+        <div class="hosting-item">
+          <span class="hosting-item-icon">1</span>
+          <span><strong>I send you the files</strong> — Once you approve the preview, I package everything and send it over WhatsApp or email.</span>
+        </div>
+        <div class="hosting-item">
+          <span class="hosting-item-icon">2</span>
+          <span><strong>You create a free Netlify account</strong> — Takes 2 minutes with just an email. No credit card needed, ever.</span>
+        </div>
+        <div class="hosting-item">
+          <span class="hosting-item-icon">3</span>
+          <span><strong>Drag, drop, done</strong> — Upload the ZIP file to Netlify. Your site is live instantly with a free link.</span>
+        </div>
+        <div class="hosting-item">
+          <span class="hosting-item-icon">4</span>
+          <span><strong>You own it</strong> — The hosting account is yours. Full control. Zero dependency on me for uptime.</span>
+        </div>
+      </div>
+
+      <div class="hosting-card-note">
+        💡 <strong>Prefer another platform?</strong> The files also work on Vercel, GitHub Pages, Cloudflare Pages, or any web host. The guide covers Netlify because it's the easiest for beginners.
+      </div>
+
+      <a href="https://wa.me/916913349575" class="hosting-cta" target="_blank">💬 Questions? WhatsApp Me</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="flogo">Make <span>IT</span> 1Arge</div>
+  <p>Guwahati, Assam</p>
+  <p style="margin-top:6px">Helping local businesses go online, one website at a time 🌐</p>
+</footer>
+
+<a href="https://wa.me/916913349575" class="waf" target="_blank" title="WhatsApp Pratik">
+  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+
+<script>
+  // Mobile detection popup
+  function checkMobilePopup() {
+    const popup = document.getElementById('mobilePopup');
+    const isMobile = window.innerWidth < 900;
+    if (isMobile) {
+      popup.classList.add('active');
+    } else {
+      popup.classList.remove('active');
+    }
+  }
+
+  checkMobilePopup();
+  window.addEventListener('resize', checkMobilePopup);
+
+  // Existing scroll and fade-up logic
+  window.addEventListener('scroll', () => {
+    document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 20);
+  });
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) setTimeout(() => e.target.classList.add('visible'), i * 100);
+    });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>
